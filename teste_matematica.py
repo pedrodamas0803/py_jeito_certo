@@ -1,7 +1,7 @@
 # de uma lista soma dos pares e multiplicacao dos impares
 
 numeros = [1, 3, 2, 4, 6, 3, 9, 3]
-from matematica import *
+from matematica import ehPar
 
 soma = 0
 produto = 1
