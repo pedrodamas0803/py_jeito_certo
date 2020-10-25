@@ -1,6 +1,9 @@
 # Um programa que recebe um numero inteiro do usuario e responde se é par
+import math 
+
 
 def ehPar(numero):
+    """Determina se um numero é par """
     if numero % 2 == 0:
         return True
     else:
@@ -32,3 +35,35 @@ def buscar(lista, elemento):
         if lista[i] == elemento:              
             indice = i
     return indice
+
+def verifica_lado(a, b, c):
+    if abs(b - c) < a and a < b + c:
+        return True
+    else:
+        return False
+
+def triang_eh_valido(a,b,c):
+    if verifica_lado(a, b, c) and verifica_lado(b, a, c) and verifica_lado(c, a, b):   
+        return True
+    else:
+        return False
+
+def semiperimetro(a, b, c):
+    return (a + b + c)/2
+
+def area_triangulo(a,b,c):
+    if triang_eh_valido:
+        p = semiperimetro(a,b,c)
+        return math.sqrt((p * (p - a) * (p - b) * (p - c)))
+    else:
+        return 0
+
+def area_circulo(raio):
+    return math.pi * raio ** 2
+
+# quando o proprio modulo for executado __name__ = __main_
+
+if __name__ == "__main__":
+    # codigo de teste: só vai ser executado se
+    # este arquivo for executado, mas não vai acontecer caso seja importado
+    pass
