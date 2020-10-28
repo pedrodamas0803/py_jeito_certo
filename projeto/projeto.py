@@ -1,4 +1,6 @@
 # nome, titulo, data_nasc, mae, pai
+import os
+
 def solicitar_dados():
     nome = input('Nome: ')
     titulo = input('Titulo de eleitor: ')
@@ -6,34 +8,54 @@ def solicitar_dados():
     mae = input('Nome da mãe: ')
     pai = input('Nome do pai: ')
     votou = input('Votou na ultima eleição? (S/N)')
-    dados = (nome, titulo, nascimento, mae, pai, votou)
+    dados = (nome, mae, pai, nascimento, titulo, votou)
     return dados
 
 def criar_base_dados(caminho):
 
-    colunas = ['nome',  'mae', 'pai', 'data_nasc', 'titulo', 'votou']
+    if not os.path.exists(caminho):
 
-    arquivo = open(caminho, 'w')
-    # JEITO PUNK
-    # linha = ''
-    # for coluna in colunas:
-    #     if 
-    #     linha = linha + f'{coluna}, '
-    # print(linha)
+        colunas = ['nome',  'mae', 'pai', 'data_nasc', 'titulo', 'votou']
 
-    linha = ','.join(colunas)
-    arquivo.write(linha + '\n')
-    arquivo.close()
+        arquivo = open(caminho, 'w')
+        # JEITO PUNK
+        # linha = ''
+        # for coluna in colunas:
+        #     if 
+        #     linha = linha + f'{coluna}, '
+        # print(linha)
+
+        linha = ','.join(colunas)
+        arquivo.write(linha + '\n')
+        arquivo.close()
 
 def cadastrar_eleitor(dados, caminho = 'base_eleitores.csv'):
-   
-    arquivo = open(caminho, 'a')
-    arquivo.write(','.join(dados) + 'n')
-    arquivo.close()
+    
+    if os.path.exists(caminho):
+            
+        arquivo = open(caminho, 'a')
+        arquivo.write(','.join(dados) + '\n')
+        arquivo.close()
+    
+    else:
+
+        criar_base_dados(caminho)
 
 
-criar_base_dados('base_eleitores.csv')
+def validar_dados_eleitor(eleitor, base = 'base_eleitores.csv'):
 
-dados_eleitor = solicitar_dados()
+    # arquivo = open(base, 'r')
+    # linha = arquivo.readlines()
+    pass
 
-cadastrar_eleitor(dados_eleitor)
+
+
+
+
+if __name__ == "__main__":
+    
+    criar_base_dados('base_eleitores.csv')
+
+    dados_eleitor = solicitar_dados()
+
+    cadastrar_eleitor(dados_eleitor)
